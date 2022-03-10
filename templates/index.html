@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<h2>hello</h2>
+{% for p in todos %}
+<h4>{{ p.title }}</h4>
+<p>{{ p.body }}</p>
+{% endfor %}
+
+
+
+{% endblock %} 

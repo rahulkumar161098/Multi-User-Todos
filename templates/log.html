@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container my-5" style="width: 30%;">
+    <h3 class="my-3 text-center">Sign in</h3>
+    <div class="alert alert-primary" role="alert">
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
+      </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">User name</label>
+            <input type="email" name="username" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="my-3">
+        <span>
+            <a href="{% url 'register_page' %}">Create acount</a>
+        </span>
+    </div>
+</div>
+
+{% endblock %}

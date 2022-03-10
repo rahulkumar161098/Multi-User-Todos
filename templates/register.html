@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container my-3" style="width: 30%;">
+    <h3 class="my-2 text-center">Sign up</h3>
+    <div class="alert alert-primary" role="alert">
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
+      </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">First Name</label>
+            <input type="text" name="first_name" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Last_name</label>
+            <input type="text" name="last_name" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" name="username" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            <input type="password" name="confirm_password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="my-3">
+        <span>
+            <a href="{% url 'login_page' %}">Alreay have account</a>
+        </span>
+    </div>
+</div>
+
+{% endblock %}
