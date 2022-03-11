@@ -20,8 +20,12 @@ from account import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='home'),
+    path('/', views.index, name='gest'),
     path('register/', views.reg, name='register_page'),
     path('login/', views.user_login, name='login_page'),
-    path('logout/', views.logout_view, name='log_out')
+    path('logout/', views.logout_view, name='log_out'),
+    path('user/', views.user_board, name='user_dashboard'),
+    path('addTodos/', views.addTodos, name='addtodos'),
+    path('delete/<int:id>', views.delete, name='todo_delete'),
+    path('details/<int:id>', views.todoDetails, name='details'),
 ]

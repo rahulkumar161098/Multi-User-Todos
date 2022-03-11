@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+<div class="container">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">S.no</th>
+                <th scope="col">Title</th>
+                <th scope="col">Body</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in todos %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="/details/{{ p.id }}">{{ p.title }}</a></td>
+                <td>{{ p.body }}</td>
+                <td>
+                   <a href="#"><button>Edit</button></a> 
+                   <a href="/delete/{{ p.id }}">Detele</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'addtodos' %}">
+        <button> Add More</button>
+    </a>
+</div>
+
+
+{% endblock %}

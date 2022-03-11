@@ -1,3 +1,4 @@
+from urllib import request
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
@@ -8,10 +9,7 @@ from .models import Customer, Product, Todo
 
 # Create your views here.
 
-def index(request):
-    todos= Todo.objects.filter(user= request.user)
-    # context={'product': product}
-    return render(request, 'index.html',{'todos': todos})
+
 
 def reg(request):
     if request.method== 'POST':
@@ -47,7 +45,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(index)
+            return redirect(user_board)
         else:
             messages.info(request,"username/pasword didn't match")
             return render(request, 'log.html')
@@ -57,4 +55,35 @@ def user_login(request):
 
 def logout_view(request):
     logout(request)
-    return redirect(user_login)
+    return redirect(index)
+
+
+def index(request):
+    return render(request, 'index.html')
+
+def user_board(request):
+    todos= Todo.objects.filter(user= request.user)
+    # context={'product': product}
+    return render(request, 'user_board.html',{'todos': todos})
+
+def addTodos(request):
+    if request.method== 'POST':
+        user=User.objects.get(username=request.user)
+        title= request.POST['title']
+        body= request.POST['textarea']
+        ex= Todo(title=title, body=body, user=user)
+        ex.save()
+        return render(request, 'user_dashboard')
+    else:  
+        return render(request, 'addTodo.html')
+
+def todoDetails(request, id):
+    details= Todo.objects.filter(id=id)
+    return render(request, 'todo_details.html', {'details': details})
+
+
+def delete(request, id):
+    dele= Todo.objects.get(id=id)
+    dele.delete()
+    todos= Todo.objects.filter(user= request.user)
+    return render(request, 'user_board.html', {'todos': todos})
