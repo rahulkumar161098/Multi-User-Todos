@@ -1,10 +1,11 @@
-from urllib import request
+
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Customer, Product, Todo
+from django.shortcuts import render, get_object_or_404
 # from django.contrib.auth import logout
 
 # Create your views here.
@@ -73,7 +74,7 @@ def addTodos(request):
         body= request.POST['textarea']
         ex= Todo(title=title, body=body, user=user)
         ex.save()
-        return render(request, 'user_dashboard')
+        return render(request, 'user_board.html')
     else:  
         return render(request, 'addTodo.html')
 
@@ -87,3 +88,15 @@ def delete(request, id):
     dele.delete()
     todos= Todo.objects.filter(user= request.user)
     return render(request, 'user_board.html', {'todos': todos})
+
+
+def edit(request, id):
+    edit=Todo.objects.get(id=id)    
+    if request.method== 'POST':
+        e_title=request.POST.get('title') 
+        e_body= request.POST.get('textarea') 
+        edit.title= e_title
+        edit.body=e_body
+        edit.save()
+        return render(request,'user_board.html')
+    return render(request, 'edit.html', {'todos': edit})

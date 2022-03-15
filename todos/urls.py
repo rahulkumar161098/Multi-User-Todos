@@ -1,4 +1,4 @@
-"""shop URL Configuration
+"""todos URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -20,7 +20,7 @@ from account import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', views.index, name='gest'),
+    path('', views.index, name='gest'),
     path('register/', views.reg, name='register_page'),
     path('login/', views.user_login, name='login_page'),
     path('logout/', views.logout_view, name='log_out'),
@@ -28,4 +28,5 @@ urlpatterns = [
     path('addTodos/', views.addTodos, name='addtodos'),
     path('delete/<int:id>', views.delete, name='todo_delete'),
     path('details/<int:id>', views.todoDetails, name='details'),
+    path('edit/<int:id>', views.edit)
 ]
