@@ -3,11 +3,13 @@
 {% block body %}
 <div class="container my-5" style="width: 30%;">
     <h3 class="my-3 text-center">Sign in</h3>
+    {% if messages.info %}
     <div class="alert alert-primary" role="alert">
         {% for msg in messages %}
-            {{ msg }}
+        {{ msg }}
         {% endfor %}
-      </div>
+    </div>
+    {% endif %}
     <form method="POST">
         {% csrf_token %}
         <div class="mb-3">

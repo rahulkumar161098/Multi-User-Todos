@@ -1,0 +1,11 @@
+.container-fluid{
+    color: green;
+    box-sizing: border-box;
+    background-color: aquamarine;
+    max-height: 90vh;
+}
+.container-fluid .clip{
+    clip-path: circle(25% at 25% 25%);
+    background-color: blueviolet;
+    border: 1px solid red;
+}
